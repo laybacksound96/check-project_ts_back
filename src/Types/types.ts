@@ -1,17 +1,27 @@
 import { Types } from "mongoose";
 
-export interface Account {
+export interface CharacterDocument extends Document {
   _id: Types.ObjectId;
-  // 다른 필요한 Account 속성들을 추가
+}
+export interface ContentDocument extends Document {
+  _id: Types.ObjectId;
+}
+
+export interface AccountDocument extends Document {
+  _id: Types.ObjectId;
+  owner: UserDocument["_id"];
+  characterOrder: CharacterDocument["_id"][];
+  contentsOrder: ContentDocument["_id"][];
 }
 
 export interface UserDocument extends Document {
+  _id: Types.ObjectId;
   user_id: string;
   user_name: string;
   discriminator: string;
   global_name?: string;
   banner_color?: string;
   avatar?: string;
-  accounts: Account["_id"][];
+  accounts: AccountDocument["_id"][];
   sheetName?: string;
 }
