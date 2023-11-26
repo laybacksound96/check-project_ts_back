@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "cp ./.env.prod ./.env && node dist/index.js",
-    "dev": "cp ./.env.dev ./.env && nodemon --watch \"*.ts\" --exec \"ts-node\" index.ts"
+    "dev": "cp ./.env.dev ./.env && nodemon --watch \"*.ts\" --exec \"ts-node\" src/index.ts"
   },
   "author": "potion overdose(412) <laybacksound@gmail.com>",
   "license": "ISC",
