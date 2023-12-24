@@ -7,14 +7,18 @@ const userSchema = new mongoose.Schema<UserDocument>({
   discriminator: { type: String, required: true, trim: true },
   global_name: { type: String, trim: true },
   banner_color: { type: String, trim: true },
-  avatar: String,
-  accounts: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Account",
-    },
-  ],
-  sheetName: String,
+  avatar: { type: String },
+  sheetName: { type: String, trim: true },
+  categoriesOrder: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Account",
+      },
+    ],
+    default: [],
+    required: true,
+  },
 });
 const User = mongoose.model("User", userSchema);
 export default User;

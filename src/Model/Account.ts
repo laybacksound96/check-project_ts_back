@@ -6,18 +6,7 @@ const accountSchema = new mongoose.Schema<AccountDocument>({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  characterOrder: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Character",
-    },
-  ],
-  contentsOrder: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Content",
-    },
-  ],
+  alias: { type: String, require: true },
 });
 const Account = mongoose.model("Account", accountSchema);
 export default Account;

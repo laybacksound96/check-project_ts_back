@@ -1,17 +1,22 @@
 import { Types } from "mongoose";
 
-export interface CharacterDocument extends Document {
-  _id: Types.ObjectId;
-}
 export interface ContentDocument extends Document {
   _id: Types.ObjectId;
+  category: ContentCategoryDocument["_id"];
+  owner: CharacterDocument["_id"];
+  isVisble: boolean;
+  isChecked: boolean;
+  gateSetting: {
+    isVisible: boolean;
+    difficulty: string;
+    isGateVisible: boolean;
+  }[];
 }
 
 export interface AccountDocument extends Document {
   _id: Types.ObjectId;
   owner: UserDocument["_id"];
-  characterOrder: CharacterDocument["_id"][];
-  contentsOrder: ContentDocument["_id"][];
+  alias: string;
 }
 
 export interface UserDocument extends Document {
@@ -22,6 +27,31 @@ export interface UserDocument extends Document {
   global_name?: string;
   banner_color?: string;
   avatar?: string;
-  accounts: AccountDocument["_id"][];
   sheetName?: string;
+  categoriesOrder: CategoryDocument["_id"][];
+}
+export interface CategoryDocument extends Document {
+  _id: Types.ObjectId;
+  owner: UserDocument["_id"];
+  alias: string;
+  accountOrder: {
+    account_id: AccountDocument["_id"];
+    characterOrder: CharacterDocument["_id"];
+  }[];
+  contentsOrder: ContentDocument["_id"][];
+}
+export interface ContentCategoryDocument extends Document {
+  _id: Types.ObjectId;
+  type: "normal" | "custom";
+  contentName: string;
+}
+
+export interface CharacterDocument extends Document {
+  _id: Types.ObjectId;
+  owner: AccountDocument["_id"];
+  name: string;
+  level: number;
+  serverName: string;
+  className: string;
+  isGoldCharacter: boolean;
 }
