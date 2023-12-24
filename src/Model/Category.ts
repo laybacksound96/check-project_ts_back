@@ -5,8 +5,12 @@ const categorySchema = new mongoose.Schema<CategoryDocument>({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    require: true,
   },
-  alias: { type: String, required: true, trim: true },
+  alias: { type: String, trim: true },
+  name: { type: String, require: true },
+  type: { type: String, require: true, enum: ["normal", "custom"], default: "normal" },
+
   accountOrder: {
     type: [
       {

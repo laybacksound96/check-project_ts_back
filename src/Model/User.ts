@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema<UserDocument>({
     type: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Account",
+        ref: "Category",
       },
     ],
     default: [],

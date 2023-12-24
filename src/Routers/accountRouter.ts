@@ -1,8 +1,8 @@
 import express from "express";
-import { putAccount } from "../Controllers/accountController";
+import { createAccount } from "../Controllers/accountController";
 
 const accountRouter = express.Router();
 
-accountRouter.put("/", putAccount);
+accountRouter.post("/", createAccount);
 
 export default accountRouter;

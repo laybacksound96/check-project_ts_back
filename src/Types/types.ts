@@ -34,6 +34,8 @@ export interface CategoryDocument extends Document {
   _id: Types.ObjectId;
   owner: UserDocument["_id"];
   alias: string;
+  name: string;
+  type: "normal" | "custom";
   accountOrder: {
     account_id: AccountDocument["_id"];
     characterOrder: CharacterDocument["_id"];
@@ -44,6 +46,7 @@ export interface ContentCategoryDocument extends Document {
   _id: Types.ObjectId;
   type: "normal" | "custom";
   contentName: string;
+  owner: UserDocument["_id"];
 }
 
 export interface CharacterDocument extends Document {
