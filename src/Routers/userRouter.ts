@@ -13,9 +13,9 @@ userRouter.post("/", async (req, res) => {
     const newUser = await User.create({ ...req.body, sheetName });
 
     const categoryNames = [
-      { name: "군단장", alias: "군단장" },
-      { name: "일일_컨텐츠", alias: "일일 컨텐츠" },
-      { name: "주간_컨텐츠", alias: "주간 컨텐츠" },
+      { name: "commander", alias: "군단장" },
+      { name: "dailyContents", alias: "일일 컨텐츠" },
+      { name: "weeklyContents", alias: "주간 컨텐츠" },
     ];
     for (const { name, alias } of categoryNames) {
       const newCategory = await Category.create({ owner: newUser._id, type: "normal", name, alias });
