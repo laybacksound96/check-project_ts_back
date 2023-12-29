@@ -48,31 +48,28 @@ export interface ContentCategoryDocument extends Document {
   contentName: string;
   owner: UserDocument["_id"];
 }
-export interface ContentConfigDocument extends Document {
+
+export interface ConfigCategoryDocument extends Document {
+  _id: Types.ObjectId;
+  subjectName: string;
+  categoryName: string;
+  contents: ConfigContentDocument["_id"][];
+}
+
+export interface ConfigContentDocument extends Document {
   _id: Types.ObjectId;
   name: string;
-  categories: [
-    {
-      categoryName: string;
-      contents: [
-        {
-          name: string;
-          data?: [
-            {
-              difficulty: string;
-              gates: [
-                {
-                  level: number;
-                  gold: number;
-                }
-              ];
-            }
-          ];
-        }
-      ];
-    }
-  ];
+  data?: {
+    difficulty: string;
+    gates: [
+      {
+        level: number;
+        gold: number;
+      }
+    ];
+  }[];
 }
+
 export interface CharacterDocument extends Document {
   _id: Types.ObjectId;
   owner: AccountDocument["_id"];
