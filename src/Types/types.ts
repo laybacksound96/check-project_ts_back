@@ -25,7 +25,7 @@ export interface CategoryDocument extends Document {
   type: "normal" | "custom";
   accountOrder: {
     account_id: AccountDocument["_id"];
-    characterOrder: CharacterDocument["_id"];
+    characterOrder: CharacterDocument["_id"][];
   }[];
   contentsOrder: ContentDocument["_id"][];
 }
@@ -45,7 +45,8 @@ export interface ContentDocument extends Document {
 export interface ContentCategoryDocument extends Document {
   _id: Types.ObjectId;
   type: "normal" | "custom";
-  contentName: string;
+  name: string;
+  alias: string;
   owner: UserDocument["_id"];
 }
 
@@ -61,12 +62,11 @@ export interface ConfigContentDocument extends Document {
   name: string;
   data?: {
     difficulty: string;
-    gates: [
-      {
-        level: number;
-        gold: number;
-      }
-    ];
+    gates: {
+      level: number;
+      gold: number;
+      seeMoreGold: number;
+    }[];
   }[];
 }
 

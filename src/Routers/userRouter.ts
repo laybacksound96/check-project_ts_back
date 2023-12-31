@@ -2,14 +2,15 @@ import express from "express";
 import { getUser } from "../Controllers/userController";
 import User from "../Model/User";
 import Category from "../Model/Category";
+import ConfigCategory from "../Model/ConfigCategory";
 
 const userRouter = express.Router();
 
 userRouter.get("/:user_id", getUser);
 userRouter.post("/", async (req, res) => {
   try {
-    const { user_id, user_name, discriminator, global_name, banner_color, avatar } = req.body;
-    const sheetName = `${global_name}님의 시트`;
+    const sheetName = `${req.body.global_name}님의 시트`;
+
     const newUser = await User.create({ ...req.body, sheetName });
 
     const categoryNames = [
@@ -22,7 +23,7 @@ userRouter.post("/", async (req, res) => {
       newUser.categoriesOrder.push(newCategory._id);
     }
     await newUser.save();
-    return res.status(200).json(newUser);
+    return res.status(200).json({});
   } catch (error) {
     console.log(error);
   }

@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import User from "../Model/User";
-import { isValidObjectId } from "mongoose";
+import { Types, isValidObjectId } from "mongoose";
 import Account from "../Model/Account";
 import Character from "../Model/Character";
+import Category from "../Model/Category";
+import ContentCategory from "../Model/ContentCategory";
 
 interface ICharacterInfo {
   ServerName: string;
@@ -22,6 +24,7 @@ export const createAccount = async (req: Request, res: Response) => {
   if (!CharacterInfo || CharacterInfo.length === 0) return res.status(400).json({ message: "CharacterInfo가 없음" });
   const user = await User.findById(userId);
   if (!user) return res.status(400).json({ message: "없는 계정" });
+  const categories = await Category.find({ owner: user._id });
 
   const sortedCharacterInfo = CharacterInfo.map((item) => ({
     ...item,
@@ -30,8 +33,13 @@ export const createAccount = async (req: Request, res: Response) => {
 
   const newAccount = await Account.create({ onwer: user._id, alias: `${sortedCharacterInfo[0].CharacterName}의 계정` });
 
+  const accountOrder: { account_id: Types.ObjectId; characterOrder: Types.ObjectId[] } = {
+    account_id: newAccount._id,
+    characterOrder: [],
+  };
+
   for (const [index, char] of sortedCharacterInfo.entries()) {
-    await Character.create({
+    const newCharacter = await Character.create({
       owner: newAccount._id,
       name: char.CharacterName,
       level: char.ItemMaxLevel,
@@ -39,7 +47,14 @@ export const createAccount = async (req: Request, res: Response) => {
       className: char.CharacterClassName,
       isGoldCharacter: index < 6,
     });
+
+    accountOrder.characterOrder.push(newCharacter._id);
   }
 
+  for (const category of categories) {
+    category.accountOrder.push(accountOrder);
+    await category.save();
+  }
+  ContentCategory;
   return res.status(200).json({});
 };

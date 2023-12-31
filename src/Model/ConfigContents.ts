@@ -10,6 +10,7 @@ const configContent = new mongoose.Schema<ConfigContentDocument>({
         {
           level: { type: Number, required: true },
           gold: { type: Number, required: true },
+          seeMoreGold: { type: Number, required: true },
         },
       ],
     },

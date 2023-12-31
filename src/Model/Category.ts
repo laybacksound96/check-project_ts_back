@@ -18,10 +18,12 @@ const categorySchema = new mongoose.Schema<CategoryDocument>({
           type: mongoose.Schema.Types.ObjectId,
           ref: "Account",
         },
-        characterOrder: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Character",
-        },
+        characterOrder: [
+          {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Character",
+          },
+        ],
       },
     ],
     default: [],
