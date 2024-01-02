@@ -55,6 +55,7 @@ export const createAccount = async (req: Request, res: Response) => {
     category.accountOrder.push(accountOrder);
     await category.save();
   }
-  ContentCategory;
+  // TODO: category.contentsOrder에 최고레벨 캐릭터 기준으로 해금되는 컨텐츠들을 집어넣어줘야함
+
   return res.status(200).json({});
 };

@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 import { ConfigContentDocument } from "../Types/types";
 
 const configContent = new mongoose.Schema<ConfigContentDocument>({
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ConfigCategory",
+    require: true,
+  },
   name: { type: String, required: true },
   data: [
     {

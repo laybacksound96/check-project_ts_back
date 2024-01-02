@@ -32,18 +32,27 @@ configRouter.post("/AllContents", async (req, res) => {
     const weeklyContents = weeklyContentsConfig;
 
     for (const commander of commanders) {
-      const newConfigContent = await ConfigContent.create(commander);
-      await ConfigCategory.findOneAndUpdate({ subjectName, categoryName: "commander" }, { $push: { contents: newConfigContent._id } });
+      const cateogory = await ConfigCategory.findOne({ subjectName, categoryName: "commander" });
+      if (!cateogory) continue;
+      const newConfigContent = await ConfigContent.create({ ...commander, owner: cateogory._id });
+      cateogory.contents.push(newConfigContent._id);
+      await cateogory.save();
     }
 
     for (const dailyContent of dailyContents) {
-      const newConfigContent = await ConfigContent.create(dailyContent);
-      await ConfigCategory.findOneAndUpdate({ subjectName, categoryName: "dailyContents" }, { $push: { contents: newConfigContent._id } });
+      const cateogory = await ConfigCategory.findOne({ subjectName, categoryName: "dailyContents" });
+      if (!cateogory) continue;
+      const newConfigContent = await ConfigContent.create({ ...dailyContent, owner: cateogory._id });
+      cateogory.contents.push(newConfigContent._id);
+      await cateogory.save();
     }
 
     for (const weeklyContent of weeklyContents) {
-      const newConfigContent = await ConfigContent.create(weeklyContent);
-      await ConfigCategory.findOneAndUpdate({ subjectName, categoryName: "weeklyContents" }, { $push: { contents: newConfigContent._id } });
+      const cateogory = await ConfigCategory.findOne({ subjectName, categoryName: "weeklyContents" });
+      if (!cateogory) continue;
+      const newConfigContent = await ConfigContent.create({ ...weeklyContent, owner: cateogory._id });
+      cateogory.contents.push(newConfigContent._id);
+      await cateogory.save();
     }
 
     return res.status(200).json();

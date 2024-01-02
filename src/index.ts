@@ -8,6 +8,7 @@ import accountRouter from "./Routers/accountRouter";
 import configRouter from "./Routers/configRouter";
 import cors from "cors";
 import { errorController } from "./Controllers/error";
+import categoryRouter from "./Routers/categoryRouter";
 
 dotenv.config();
 const app = express();
@@ -24,6 +25,7 @@ app.use(errorController);
 app.use("/user", userRouter);
 app.use("/account", accountRouter);
 app.use("/config", configRouter);
+app.use("/category", categoryRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}, Mode = ${process.env.MODE}`);

@@ -47,7 +47,7 @@ export interface ContentCategoryDocument extends Document {
   type: "normal" | "custom";
   name: string;
   alias: string;
-  owner: UserDocument["_id"];
+  owner: CategoryDocument["_id"];
 }
 
 export interface ConfigCategoryDocument extends Document {
@@ -59,6 +59,7 @@ export interface ConfigCategoryDocument extends Document {
 
 export interface ConfigContentDocument extends Document {
   _id: Types.ObjectId;
+  owner: ConfigCategoryDocument["_id"];
   name: string;
   data?: {
     difficulty: string;

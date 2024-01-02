@@ -7,7 +7,7 @@ const contentCategorySchema = new mongoose.Schema<ContentCategoryDocument>({
   alias: { type: String, trim: true },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Category",
     require: true,
   },
 });
