@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "cp ./.env.prod ./.env && node dist/index.js",
-    "dev": "cp ./.env.dev ./.env && nodemon --watch \"*.ts\" --exec \"ts-node\" src/index.ts"
+    "dev": "nodemon --watch \"*.ts\" --exec \"ts-node\" src/index.ts"
   },
   "author": "potion overdose(412) <laybacksound@gmail.com>",
   "license": "ISC",
@@ -19,7 +19,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.3.2",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "openai": "^4.26.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.4",

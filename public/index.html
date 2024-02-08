@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Express Form</title>
+  </head>
+  <body>
+    <h1>신나는 세특쓰기</h1>
+    <form action="/submit" method="post" id="form">
+      <label for="subject">주제</label>
+      <input type="text" id="subject" name="subject" placeholder="원소의 주기성" required />
+
+      <br />
+
+      <label for="keyword">키워드</label>
+      <input type="text" id="keyword" name="keyword" placeholder="원소의 구분 (금속 비금속) (고체 액체 기체)" required />
+
+      <br />
+      <button type="submit" id="submitBtn">생성</button>
+      <span id="status"> </span>
+      <br />
+      <textarea name="" id="textarea" cols="30" rows="10"></textarea>
+      <br />
+      <button type="button" id="copyBtn">복사하기</button>
+    </form>
+    <script src="/indexControl.js"></script>
+  </body>
+</html>
