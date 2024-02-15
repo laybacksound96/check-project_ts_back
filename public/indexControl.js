@@ -36,12 +36,6 @@ form.addEventListener("submit", async (e) => {
     });
 });
 
-copyBtn.addEventListener("click", () => {
-  result.select();
-  document.execCommand("copy");
-  copyBtn.innerText = "복사 완료됨";
-});
-
 researchForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -63,4 +57,16 @@ researchForm.addEventListener("submit", async (e) => {
       researchSubmitBtn.disabled = false;
       researchStatusSpan.innerText = "완료!";
     });
+});
+
+copyBtn.addEventListener("click", () => {
+  result.select();
+  document.execCommand("copy");
+  copyBtn.innerText = "복사 완료됨";
+});
+
+researchCopyBtn.addEventListener("click", () => {
+  researchResult.select();
+  document.execCommand("copy");
+  researchCopyBtn.innerText = "복사 완료됨";
 });
