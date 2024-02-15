@@ -28,6 +28,6 @@ app.get("/", (req, res) => {
 app.post("/getText", getIntegratedScience);
 app.post("/getResearch", getScienceResearch);
 
-app.listen(8080, () => {
-  console.log(`Server is running on port 8080`);
+app.listen(80, () => {
+  console.log(`Server is running on port 80`);
 });
